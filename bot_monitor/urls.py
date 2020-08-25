@@ -21,6 +21,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from bot_monitor import settings
 
+
 urlpatterns =[
     path('admin/', admin.site.urls),
     path('',include('core.urls')),

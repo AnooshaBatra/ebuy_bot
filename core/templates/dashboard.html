@@ -12,10 +12,28 @@
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <!-- GOOGLE FONTS-->
 
  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+ 
+    #myChart {
+      height: 100%;
+      width: 100%;
+      min-height: 150px;
+    }
+ 
+    .zc-ref {
+      display: none;
+    }
+  </style>
 </head>
  
 <body>
@@ -33,7 +51,7 @@
                  <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                       
-                       <button class="btn btn-primary">Logout </button></b>
+                       <a href="{% url 'account_login' %}"> <button class="btn btn-primary">Logout </button></a>
                       
                     </ul>
                 </div>
@@ -53,10 +71,10 @@
                         <a href="#"><i class="fa fa-desktop "></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
+                        <a ><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="log">Log</a>
+                                <a href="/log">EBUY GSA</a>
                             </li>
                             
                         </ul>
@@ -78,17 +96,222 @@
             <div id="page-inner">
                  <div class="row">
                     <div class="col-md-12">
-                        <h2>ZingSoft Demo</h2>
+                        <h2  style="text-align: center;">DashBoard</h2>
 
                          <hr />
-                <div class="row">
-                    
-                        
-                        <div id='myChart'></div>
-                           
-                            
-                        </div>
-                      
+                          <div id="myChart" class="chart--container">
+    <a href="https://www.zingchart.com/" rel="noopener" class="zc-ref">Powered by ZingChart</a>
+  </div>
+
+   <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a></div>
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    var myConfig = {
+      "graphset": [{
+        "type": "bar",
+        "background-color": "white",
+        "title": {
+          "text": "Dummy Chart",
+          "font-color": "#7E7E7E",
+          "backgroundColor": "none",
+          "font-size": "22px",
+          "alpha": 1,
+          "adjust-layout": true,
+        },
+        "plotarea": {
+          "margin": "dynamic"
+        },
+        "legend": {
+          "layout": "x3",
+          "overflow": "page",
+          "alpha": 0.05,
+          "shadow": false,
+          "align": "center",
+          "adjust-layout": true,
+          "marker": {
+            "type": "circle",
+            "border-color": "none",
+            "size": "10px"
+          },
+          "border-width": 0,
+          "maxItems": 3,
+          "toggle-action": "hide",
+          "pageOn": {
+            "backgroundColor": "#000",
+            "size": "10px",
+            "alpha": 0.65
+          },
+          "pageOff": {
+            "backgroundColor": "#7E7E7E",
+            "size": "10px",
+            "alpha": 0.65
+          },
+          "pageStatus": {
+            "color": "black"
+          }
+        },
+        "plot": {
+          "bars-space-left": 0.15,
+          "bars-space-right": 0.15,
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM",
+            "sequence": 0,
+            "speed": 800,
+            "delay": 800
+          }
+        },
+        "scale-y": {
+          "line-color": "#7E7E7E",
+          "item": {
+            "font-color": "#7e7e7e"
+          },
+          "values": "0:60:10",
+          "guide": {
+            "visible": true
+          },
+          "label": {
+            "text": "$ Billions",
+            "font-family": "arial",
+            "bold": true,
+            "font-size": "14px",
+            "font-color": "#7E7E7E",
+          },
+        },
+        "scaleX": {
+          "values": [
+            "Q3",
+            "Q4",
+            "Q1",
+            "Q2"
+          ],
+          "placement": "default",
+          "tick": {
+            "size": 58,
+            "placement": "cross"
+          },
+          "itemsOverlap": true,
+          "item": {
+            "offsetY": -55
+          }
+        },
+        "scaleX2": {
+          "values": ["2013", "2014"],
+          "placement": "default",
+          "tick": {
+            "size": 20,
+          },
+          "item": {
+            "offsetY": -15
+          }
+        },
+        "tooltip": {
+          "visible": false
+        },
+        "crosshair-x": {
+          "line-width": "100%",
+          "alpha": 0.18,
+          "plot-label": {
+            "header-text": "%kv Sales"
+          }
+        },
+
+        "series": [{
+            "values": [
+              3747,
+              5759,
+              4565,
+              3743
+            ],
+            "alpha": 0.95,
+            "borderRadiusTopLeft": 7,
+            "background-color": "#8993c7",
+            "text": "Apple",
+          },
+          {
+            "values": [
+              202,
+              259,
+              25,
+              291
+            ],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#fdb462",
+            "text": "Facebook"
+          },
+          {
+            "values": [
+              14566,
+              1411,
+              1489,
+              1686
+            ],
+            "alpha": 0.95,
+            "borderRadiusTopLeft": 7,
+            "background-color": "#8dd3c7",
+            "text": "Google"
+          },
+          {
+            "values": [
+              1853,
+              2452,
+              204,
+              2338
+            ],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#fb8072",
+            "text": "Microsoft"
+          },
+          {
+            "values": [
+              17.09,
+              2559,
+              1974,
+              1934
+            ],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#80b1d3",
+            "text": "Amazon"
+          },
+          {
+            "values": [
+              1709,
+              2559,
+              1974,
+              1934
+            ],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#80b1d3",
+            "text": "Amazon"
+          },
+          {
+            "values":[20,40,25,50,15,45,33,34],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#80b1d3",
+            "text": "Amazon"
+          },
+          {
+            "values": [5,30,21,18,59,50,28,33],
+            "borderRadiusTopLeft": 7,
+            "alpha": 0.95,
+            "background-color": "#b3de69",
+            "text": "Cognizant"
+          }
+        ]
+      }]
+    };
+ 
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: '100%',
+      width: '100%'
+    });
+  </script>              
                         
                  
                    
@@ -98,6 +321,8 @@
 </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
+</div>
+</div>
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
