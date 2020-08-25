@@ -75,23 +75,28 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
-                
-<table class="center" width="100%" height= "100%"  bgcolor="#00ff00"  style="margin-left:auto;margin-right:auto;">
+               
+<table class="center" width="100%" height= "100%"  bgcolor="#00ff00"  style="margin-left:auto margin-right:auto; table-layout:fixed;">
   <tr>
-    <th>Run </th>
-    <th>  Error </th>
+    <th>Bot Last Runtime Info </th>
+    <th>Errors During Runtime </th>
   </tr>
   <tr>
-    <td>January</td>
-    <td>$100</td>
-  </tr>
-  <tr>
-    <td>February</td>
-    <td>$80</td>
+  <td>
+  <br>
+    Bot Name : {{log_info.name}} <br> <br>
+    Bot Source of trigger :  {{log_info.source}} <br> <br>
+	Bot Last Run: {{log_info.last_run}} <br> <br>
+	Bot Total Tables Retrieved: {{log_info.tables}} <br> <br>
+	Bot Running Time: {{log_info.total_time}} <br> <br>
+	Last Run Status: {{log_info.status}} <br>	 <br>
+ </td>
+  <td>{{log_error}}</td>
   </tr>
 </table>
-
-<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%"> Manual Tigger Bot</button> </a>sss
+<br>
+ <strong><h>Bot current status : {{status}}</h></strong>
+<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered '+{{status}})"> Manual Tigger Bot</button> </a>
 </div>
 </div>
 </div>
