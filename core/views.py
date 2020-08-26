@@ -11,10 +11,10 @@ def dashboard(request):
 		password = request.POST.get('password')
 		user=authenticate(username= username, password=password)
 		if user is not None:
-		 	print("authenticated")
+		 	
 		 	return render(request, 'dashboard.html',{})
 		else:
-		 	print("not authenticated")
+		 	
 		 	return HttpResponse("Your account was inactive.")
 	 
 	#return HttpResponse("dashboarddd", content_type='text/plain')
@@ -50,10 +50,10 @@ def log(request):
         f = open(run_status)
         status = f.readline().strip()
         if status == 'running':
-            result['status'] = 'Already Running'
+            result['status'] = 'Please wait! Bot is already running'
     
         elif status == 'stopped':
-            result['status'] = 'Not Running'
+            result['status'] = 'Bot is not running'
         f.close()
             
     with open(info_path) as log_info:
@@ -109,7 +109,8 @@ def launch(request):
         status = f.readline().strip()
         f.close()
         if status == 'running':
-            result['status'] = 'Already Running'
+            result['alert'] = 'Please wait! Bot is already running'
+            result['status'] = 'Please wait! Bot is already running'
             return render(request,'log.html',context=result)
         elif status == 'stopped':
             try:
@@ -128,8 +129,11 @@ def launch(request):
                 f = open(run_status,'w')
                 f.write('stopped')
                 f.close()
-                return HttpResponse("Something Went Wrong",status=404)
-            result['status'] = 'Not Running'
+                result['status'] = 'Bot is not running'
+                result['alert'] = 'Something went wrong'
+                return render(request,'log.html',result)
+            result['alert'] = 'Bot is starting...'
+            result['status'] = 'Please wait! Bot is already running'
             return render(request,'log.html',context=result)
     else:
         try:
@@ -147,7 +151,10 @@ def launch(request):
             f = open(run_status,'w')
             f.write('stopped')
             f.close()
-            return HttpResponse("Something Went Wrong",status=404)
-        result['status'] = 'Not Running'
+            result['status'] = 'Bot is not running'
+            result['alert'] = 'Something went wrong'
+            return render(request,'log.html',result)
+        result['alert'] = 'Bot is starting...'
+        result['status'] = 'Please wait! Bot is already running'
         return render(request,'log.html',result)
  
