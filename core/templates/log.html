@@ -36,8 +36,11 @@
                 </div>
                  <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                      
-                      <a href="{% url 'account_login' %}"> <button class="btn btn-primary">Logout </button></a>
+                       <form method="post" action="{% url 'account_logout' %}">
+                         {% csrf_token %}
+                          <button  class= "btn-primary" type="submit"> LogOut </button>
+</form>
+                     
                       
                     </ul>
                 </div>
@@ -50,96 +53,48 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    
-
-
-                    <li>
-                        <a href="dash"><i class="fa fa-desktop "></i>Dashboard</a>
-                    </li>
+                 <li><a href="dash"><i class="fa fa-desktop "></i>Dashboard</a></li>
                     <li>
                         <a ><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="log">EBUY GSA</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-
-                   
-                    
-
-
-             
-                  
+                            <li> <a href="log">EBUY GSA</a></li>
+                            </ul>
+                    </li>  
                 </ul>
-
             </div>
-
         </nav> 
-
-    
-    
-        <!-- /. NAV SIDE  -->
+<!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
-                    <h2 align="center">EBUY GSA</h2>
-
-                         <hr />
+                    <h2 align="center">EBUY GSA</h2><hr />
                   
-<div class="container-fluid" style="background-color:white">
-  
-  <div class="row" style="margin-left:20px" >
-    <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height: 300px; width:400px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
-    border-radius: 10px">
-        <h2>Bots Information</h2>
-      <p>Bot Name: {{log_info.name}}  </p>
-      <p>Bot Source of Trigger: {{log_info.source}} </p>
-      <p>Bot Last Run: {{log_info.last_run}}</p>
-      <p>Bot Total Tables:{{log_info.tables}} </p>
-      <p>Bot Runing Time:  {{log_info.total_time}} </p>
-      <p>Bot Status: {{log_info.status}} </p>
-      <p> Bot current status : {{status}} </p>
-    </div>
-    <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
-    <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
-    border-radius: 10px"">
-         <h2>Errors During Runtime</h2>
-       {{log_error}}
-<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered '+{{status}})"> Manual Tigger Bot</button> </a>
+                    <div class="container-fluid" style="background-color:white">
+                         <div class="row" style="margin-left:20px" >
+                             <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height:300px; width:400px;padding-top: 10px;padding-left: 10px;padding-right: 10px;padding-bottom: 0px;border-radius: 10px">
+                                    <h2>Bots Information</h2>
+                                    <p>Bot Name:   </p>
+                                    <p>Bot Source of Trigger:  </p>
+                                    <p>Bot Last Run: </p>
+                                    <p>Bot Total Tables: </p>
+                                    <p>Bot Runing Time:   </p>
+                                    <p>Bot Status: </p>
+                                    <p> Bot current status :  </p>
+                             </div>
+                             <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
+                             <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;padding-top: 10px;padding-left: 10pxpadding-right: 10px;padding-bottom: 0px;border-radius: 10px">
+                                 <h2>Errors During Runtime</h2>
+                                 <a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered ')"> Manual Tigger Bot</button> </a>
     
-  </div>
-</div>
+                            </div>
+                        </div>
                  </div>
                 
 
+                </div>
+        </div>
 </div>
-</div>
-</div>
-
-
-
-
-                          
-                   
-                        
-                 
-                   
-                      
- 
-
-</div>
-        <!-- /. PAGE WRAPPER  -->
-    </div>
+  
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
