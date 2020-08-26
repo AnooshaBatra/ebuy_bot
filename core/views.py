@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
+
 info_path = r"C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.info"
 error_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.error'
 run_status = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\status.log'
