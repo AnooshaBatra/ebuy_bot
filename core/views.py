@@ -94,7 +94,6 @@ def log(request):
         
         print("result:",result)
     return render(request,'log.html',context=result)
-
    
             
 
@@ -125,6 +124,7 @@ def launch(request):
                 result['log_info'][key] = value
     else:
         result['log_info'] = '404 - Runtime info file not found'
+        
     
     if os.path.exists(error_path):
         with open(error_path) as log_error:
@@ -132,6 +132,7 @@ def launch(request):
     
     else:
         result['log_error'] = '404 - Error file not found'
+        
     
     
     
