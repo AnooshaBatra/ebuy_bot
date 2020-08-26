@@ -12,6 +12,10 @@
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- GOOGLE FONTS-->
 
  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
@@ -28,15 +32,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">&nbsp;Welcome To EBUY BOT MONITOR</a>
+                    <span class="navbar-brand" >&nbsp; Welcome To EBUY BOT MONITOR</a>
                 </div>
                  <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                       
-                     <a href="logout">  <button class="btn-primary"> Logout  </button> </a>
+                      <a href="{% url 'account_login' %}"> <button class="btn btn-primary">Logout </button></a>
                       
                     </ul>
-                </div><a href="logout"> 
+                </div>
                 
 
             </div>
@@ -49,14 +53,15 @@
                     
 
 
-                    
                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
+                        <a href="dash"><i class="fa fa-desktop "></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a ><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Log</a>
+                                <a href="log">EBUY GSA</a>
                             </li>
-                        
                             
                         </ul>
                     </li>
@@ -71,32 +76,52 @@
 
             </div>
 
-        </nav>
+        </nav> 
+
+    
+    
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
-               
-<table class="center" width="100%" height= "100%"  bgcolor="#00ff00"  style="margin-left:auto margin-right:auto; table-layout:fixed;">
-  <tr>
-    <th>Bot Last Runtime Info </th>
-    <th>Errors During Runtime </th>
-  </tr>
-  <tr>
-  <td>
-  <br>
-    Bot Name : {{log_info.name}} <br> <br>
-    Bot Source of trigger :  {{log_info.source}} <br> <br>
-	Bot Last Run: {{log_info.last_run}} <br> <br>
-	Bot Total Tables Retrieved: {{log_info.tables}} <br> <br>
-	Bot Running Time: {{log_info.total_time}} <br> <br>
-	Last Run Status: {{log_info.status}} <br>	 <br>
- </td>
-  <td>{{log_error}}</td>
-  </tr>
-</table>
-<br>
- <strong><h>Bot current status : {{status}}</h></strong>
-<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered '+{{status}})"> Manual Tigger Bot</button> </a>
+                <div class="row">
+                    <h2 align="center">EBUY GSA</h2>
+
+                         <hr />
+                  
+<div class="container-fluid" style="background-color:white">
+  
+  <div class="row" style="margin-left:20px" >
+    <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height: 300px; width:400px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    border-radius: 10px">
+        <h2>Bots Information</h2>
+      <p>Bot Name: {{log_info.name}}  </p>
+      <p>Bot Source of Trigger: {{log_info.source}} </p>
+      <p>Bot Last Run: {{log_info.last_run}}</p>
+      <p>Bot Total Tables:{{log_info.tables}} </p>
+      <p>Bot Runing Time:  {{log_info.total_time}} </p>
+      <p>Bot Status: {{log_info.status}} </p>
+      <p> Bot current status : {{status}} </p>
+    </div>
+    <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
+    <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    border-radius: 10px"">
+         <h2>Errors During Runtime</h2>
+       {{log_error}}
+<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered - '+'{{alert}}')"> Manual Trigger Bot</button> </a>
+    
+  </div>
+</div>
+                 </div>
+                
+
 </div>
 </div>
 </div>
