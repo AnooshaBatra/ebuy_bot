@@ -82,7 +82,8 @@ def log(request):
                 value = line.split('::')[1].strip()
                 result['log_info'][key] = value
     else:
-        result['log_info'] = '404 - Runtime info file not found'
+        
+        result['log_info']['status'] = '404 - Runtime info file not found'
         
     if os.path.exists(error_path):
         with open(error_path) as log_error:
