@@ -69,22 +69,34 @@
                 <div class="row">
                     <h2 align="center">EBUY GSA</h2><hr />
                   
-                    <div class="container-fluid" style="background-color:white">
-                         <div class="row" style="margin-left:20px" >
-                             <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height:300px; width:400px;padding-top: 10px;padding-left: 10px;padding-right: 10px;padding-bottom: 0px;border-radius: 10px">
-                                    <h2>Bots Information</h2>
-                                    <p>Bot Name:   </p>
-                                    <p>Bot Source of Trigger:  </p>
-                                    <p>Bot Last Run: </p>
-                                    <p>Bot Total Tables: </p>
-                                    <p>Bot Runing Time:   </p>
-                                    <p>Bot Status: </p>
-                                    <p> Bot current status :  </p>
-                             </div>
-                             <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
-                             <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;padding-top: 10px;padding-left: 10pxpadding-right: 10px;padding-bottom: 0px;border-radius: 10px">
-                                 <h2>Errors During Runtime</h2>
-                                 <a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered ')"> Manual Tigger Bot</button> </a>
+<div class="container-fluid" style="background-color:white">
+  
+  <div class="row" style="margin-left:20px" >
+    <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height: 300px; width:400px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    border-radius: 10px">
+        <h2>Bots Information</h2>
+      <p>Bot Name: {{log_info.name}}  </p>
+      <p>Bot Source of Trigger: {{log_info.source}} </p>
+      <p>Bot Last Run: {{log_info.last_run}}</p>
+      <p>Bot Total Tables:{{log_info.tables}} </p>
+      <p>Bot Runing Time:  {{log_info.total_time}} </p>
+      <p>Bot Status: {{log_info.status}} </p>
+      <p> Bot current status : {{status}} </p>
+    </div>
+    <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
+    <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    border-radius: 10px"">
+         <h2>Errors During Runtime</h2>
+       {{log_error}}
+<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered - '+'{{alert}}')"> Manual Trigger Bot</button> </a>
     
                             </div>
                         </div>
