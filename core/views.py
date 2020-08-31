@@ -1,41 +1,54 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login as auth_login
 import subprocess, os
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
-info_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.info'
+
+info_path = r"C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.info"
 error_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.error'
 run_status = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\status.log'
 bat_file = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\run_from_web_app.bat'
 
-def dashboard(request):
+def Login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 		user=authenticate(username= username, password=password)
 		if user is not None:
-		 	
-		 	return render(request, 'dashboard.html',{})
-		else:
-		 	
-		 	return HttpResponse("Your account was inactive.")
-	 
+		 	print("authenticated")
+		 	if user is not None:
+		 		if user.is_active:
+		 			auth_login(request, user)
+		 			return redirect('index')
+		 		else:
+		 			messages.error(request,'username or password not correct')
+		 			return redirect('login')
+		 	else:
+		 		form = AuthenticationForm()
+		 		return render(request, 'todo/login.html', {'form': form})
 	#return HttpResponse("dashboarddd", content_type='text/plain')
 
-
+# @login_required
 # def log(request):
 # 	return render(request, 'log.html',{})
 
 
-
+@login_required
 def dash(request):
 	return render(request, 'dashboard.html',{})
 
+@login_required
+def logout(request):
+    logout(request)
 
+# def launch(request):
+# 	pass
 
-
+@login_required
 def log(request):
     # info_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.info'
     # error_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.error'
@@ -70,7 +83,8 @@ def log(request):
                 value = line.split('::')[1].strip()
                 result['log_info'][key] = value
     else:
-        result['log_info'] = '404 - Runtime info file not found'
+        
+        result['log_info']['status'] = '404 - Runtime info file not found'
         
     if os.path.exists(error_path):
         with open(error_path) as log_error:
@@ -80,7 +94,6 @@ def log(request):
         
         print("result:",result)
     return render(request,'log.html',context=result)
-
    
             
 
@@ -91,13 +104,13 @@ def launch(request):
     # run_status = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\status.log'
     
     result = {
-		'log_info' : {
-		'name': 'Ebuy Automation',
-		'source' : 'Unknown',
-		'last_run': 'Unknown',
-		'tables':'Unkown',
-		'total_time':'Unknown',
-		'status':'Unknown'
+ 		'log_info' : {
+ 		'name': 'Ebuy Automation',
+ 		'source' : 'Unknown',
+ 		'last_run': 'Unknown',
+ 		'tables':'Unkown',
+ 		'total_time':'Unknown',
+ 		'status':'Unknown'
 		}
 	}
     
@@ -111,6 +124,7 @@ def launch(request):
                 result['log_info'][key] = value
     else:
         result['log_info'] = '404 - Runtime info file not found'
+        
     
     if os.path.exists(error_path):
         with open(error_path) as log_error:
@@ -118,6 +132,7 @@ def launch(request):
     
     else:
         result['log_error'] = '404 - Error file not found'
+        
     
     
     
