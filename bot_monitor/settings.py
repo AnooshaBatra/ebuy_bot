@@ -85,13 +85,26 @@ WSGI_APPLICATION = 'bot_monitor.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'BotMonitoring',
+        'HOST': 'HP\SQLEXPRESS',
+        'USER': 'sa',
+        'PASSWORD': 'izone500',
+
+        'OPTIONS': {
+            'driver':  'ODBC Driver 17 for SQL Server',
+                    }
     }
 }
 
 
+
+# set this to False if you want to turn off pyodbc's connection pooling
+DATABASE_CONNECTION_POOLING = False
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

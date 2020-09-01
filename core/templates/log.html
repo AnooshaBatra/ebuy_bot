@@ -21,7 +21,8 @@
  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
-<body style="background-color:#F3F3F3 ;">
+ 
+<body>
     <div id="wrapper">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -35,11 +36,8 @@
                 </div>
                  <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                       <form method="post" action="{% url 'account_logout' %}">
-                         {% csrf_token %}
-                          <button  class= "btn-primary" type="submit"> LogOut </button>
-</form>
-                     
+                      
+                      <a href="{% url 'account_login' %}"> <button class="btn btn-primary">Logout </button></a>
                       
                     </ul>
                 </div>
@@ -49,26 +47,48 @@
         </div>
         <!-- /. NAV TOP  -->
     
-        <nav class="navbar-default navbar-side" role="navigation"  style="height:650px; background-color: rgb(255, 255, 255);">
+        <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                 <li><a href="dash"><i class="fa fa-desktop "></i>Dashboard</a></li>
+                    
+
+
+                    <li>
+                        <a href="dash"><i class="fa fa-desktop "></i>Dashboard</a>
+                    </li>
                     <li>
                         <a ><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="log">EBUY GSA</a></li>
-                            </ul>
-                    </li>  
+                            <li>
+                                <a href="log">EBUY GSA</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+
+                   
+                    
+
+
+             
+                  
                 </ul>
+
             </div>
+
         </nav> 
-<!-- /. NAV SIDE  -->
+
+    
+    
+        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
-                    <h2 align="center">EBUY GSA</h2><hr />
+                    <h2 align="center">EBUY GSA</h2>
+
+                         <hr />
                   
-<div class="container-fluid">
+<div class="container-fluid" style="background-color:white">
   
   <div class="row" style="margin-left:20px" >
     <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height: 300px; width:400px;
@@ -97,15 +117,29 @@
        {{log_error}}
 <a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered - '+'{{alert}}')"> Manual Trigger Bot</button> </a>
     
-                            </div>
-                        </div>
+  </div>
+</div>
                  </div>
                 
 
-                </div>
-        </div>
 </div>
-  
+</div>
+</div>
+
+
+
+
+                          
+                   
+                        
+                 
+                   
+                      
+ 
+
+</div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->

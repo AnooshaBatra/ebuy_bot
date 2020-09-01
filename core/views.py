@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate,login as auth_login
 import subprocess, os
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from core.models import EBUYRFQ
 # Create your views here.
 
 
@@ -53,7 +54,11 @@ def log(request):
     # info_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.info'
     # error_path = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\log.error'
     # run_status = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\status.log'
-    
+    res= None
+    try:
+        res= EBUYRFQ.objects.all().filter(bot_name= "eb").order_by('id').last()
+    except Exception as e:
+        print(e)
     result = {
 		'log_info' : {
 		'name': 'Ebuy Automation',
@@ -64,35 +69,20 @@ def log(request):
 		'status':'Unknown'
 		}
 	}
-    if os.path.exists(run_status):
-        f = open(run_status)
-        status = f.readline().strip()
+    if res != None:
+        result['log_info']['name'] = res.info_name
+        result['log_info']['source'] = res.info_source
+        result['log_info']['last_run'] = res.last_run 
+        result['log_info']['tables'] = res.tables_count
+        result['log_info']['total_time'] = res.total_run_time
+        result['log_error']= res.log_error
+        status = res.status
         if status == 'running':
             result['status'] = 'Please wait! Bot is already running'
-    
         elif status == 'stopped':
             result['status'] = 'Bot is not running'
-        f.close()
-    else:
-        result['result'] = '404 - Status file not found'
-        
-    if os.path.exists(info_path):
-        with open(info_path) as log_info:
-            for line in log_info:
-                key = line.split('::')[0].strip()
-                value = line.split('::')[1].strip()
-                result['log_info'][key] = value
-    else:
-        
-        result['log_info']['status'] = '404 - Runtime info file not found'
-        
-    if os.path.exists(error_path):
-        with open(error_path) as log_error:
-            result['log_error'] = log_error.read()
-    else:
-        result['log_error'] = '404 - Error file not found'
-        
-        print("result:",result)
+        else:
+            result['result'] = '404 - Status file not found'
     return render(request,'log.html',context=result)
    
             
@@ -113,80 +103,56 @@ def launch(request):
  		'status':'Unknown'
 		}
 	}
-    
-    
-    if os.path.exists(info_path):       
-    
-        with open(info_path) as log_info:
-            for line in log_info:
-                key = line.split('::')[0].strip()
-                value = line.split('::')[1].strip()
-                result['log_info'][key] = value
+    res= None
+    try:
+        res= EBUYRFQ.objects.all().filter(bot_name= "eb").order_by('id').last()
+    except Exception as e:
+        print(e)
+    if res != None:
+        result['log_info']['name'] = res.info_name
+        result['log_info']['source'] = res.info_source
+        result['log_info']['last_run'] = res.last_run 
+        result['log_info']['tables'] = res.tables_count
+        result['log_info']['total_time'] = res.total_run_time 
+        result['log_error']=res.log_error
     else:
         result['log_info'] = '404 - Runtime info file not found'
-        
-    
-    if os.path.exists(error_path):
-        with open(error_path) as log_error:
-            result['log_error']=log_error.read()
-    
-    else:
         result['log_error'] = '404 - Error file not found'
-        
     
-    
-    
-    
-    
+     
     #run_status = r'C:\Users\Administrator\Desktop\transviti\ebuy_automation\status.log'
     try:
-        if os.path.exists(run_status):
-            f = open(run_status)
-            status = f.readline().strip()
-            f.close()
-            if status == 'running':
-                result['alert'] = 'Please wait! Bot is already running'
-                result['status'] = 'Please wait! Bot is already running'
-                return render(request,'log.html',context=result)
-            elif status == 'stopped':
-                try:
-                    os.remove(run_status)
-                    f = open(run_status,'w')
-                    f.write('running')
-                    f.close()
-                    subprocess.run([bat_file])
-                    print("writing stopp")
-                    os.remove(run_status)
-                    f = open(run_status,'w')
-                    f.write('stopped')
-                    f.close()
-                except:
-                    os.remove(run_status)
-                    f = open(run_status,'w')
-                    f.write('stopped')
-                    f.close()
-                    result['status'] = 'Bot is not running'
-                    result['alert'] = 'Something went wrong'
-                    return render(request,'log.html',result)
-                result['alert'] = 'Bot is starting...'
-                result['status'] = 'Please wait! Bot is already running'
-                return render(request,'log.html',context=result)
+        status = res.status
+        if status == 'running':
+            result['alert'] = 'Please wait! Bot is already running'
+            result['status'] = 'Please wait! Bot is already running'
+            return render(request,'log.html',context=result)
+        elif status == 'stopped':
+            try:
+                res.status= 'running'
+                res.save()
+                subprocess.run([bat_file])
+                res.status="stopped"
+                res.save()
+            except:
+                res.status= 'stopped'
+                res.save()
+                result['status'] = 'Bot is not running'
+                result['alert'] = 'Something went wrong'
+                return render(request,'log.html',result)
+            result['alert'] = 'Bot is starting...'
+            result['status'] = 'Please wait! Bot is already running'
+            return render(request,'log.html',context=result)
         else:
             try:
-                f = open(run_status,'w')
-                f.write('running')
-                f.close()
+                res.status= 'running'
+                res.save()
                 subprocess.run([bat_file])
-                print("writing stopp")
-                os.remove(run_status)
-                f = open(run_status,'w')
-                f.write('stopped')
-                f.close()
+                res.status= "stopped"
+                res.save()
             except:
-                os.remove(run_status)
-                f = open(run_status,'w')
-                f.write('stopped')
-                f.close()
+                res.status= 'stopped'
+                res.save()
                 result['status'] = 'Bot is not running'
                 result['alert'] = 'Something went wrong'
                 return render(request,'log.html',result)
