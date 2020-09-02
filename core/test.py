@@ -26,14 +26,4 @@ log= EBUYRFQ(
 
 
 log.save(force_insert=True)
-log= EBUYRFQ(
-    info_name= "unknwon",
-    info_source="unknown",
-    last_run=las_run,
-    tables_count= "9",
-    total_run_time=" ",
-    status= " unknown",
-    current_status= "unknwon",
-    log_error= "error",
-    count = str(count)
-)
+

@@ -13,3 +13,6 @@ class EBUYRFQ(models.Model):
     count = models.TextField(blank=True)
     bot_name=models.TextField(default="bot_name")
 
+
+
+ 

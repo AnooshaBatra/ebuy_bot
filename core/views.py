@@ -6,6 +6,8 @@ import subprocess, os
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from core.models import EBUYRFQ
+from django.http import JsonResponse
+from django.utils.safestring import mark_safe
 # Create your views here.
 
 
@@ -40,7 +42,22 @@ def Login(request):
 
 @login_required
 def dash(request):
-	return render(request, 'dashboard.html',{})
+    resu= EBUYRFQ.objects.all()
+    aSeriesTimeData1 = []
+    aSeriesCountData1 = []
+    response_data = {}
+    for e in resu:
+        aSeriesTimeData1.append(mark_safe(e.last_run))
+        aSeriesCountData1.append(mark_safe(e.count))
+    testlist = [int(i) for i in aSeriesCountData1] 
+    response_data['x'] = aSeriesTimeData1
+    response_data['y'] = aSeriesCountData1
+    result={
+        'x':aSeriesTimeData1,
+        'y': testlist
+    }
+    
+    return render(request, 'dashboard.html',context=result)
 
 @login_required
 def logout(request):
@@ -75,14 +92,18 @@ def log(request):
         result['log_info']['last_run'] = res.last_run 
         result['log_info']['tables'] = res.tables_count
         result['log_info']['total_time'] = res.total_run_time
+        result['log_info']['status']= res.current_status
         result['log_error']= res.log_error
+        
         status = res.status
+        print(status)
         if status == 'running':
             result['status'] = 'Please wait! Bot is already running'
         elif status == 'stopped':
             result['status'] = 'Bot is not running'
-        else:
-            result['result'] = '404 - Status file not found'
+    else:
+        result['result']= '404- Status File not Found'
+          
     return render(request,'log.html',context=result)
    
             
@@ -114,6 +135,7 @@ def launch(request):
         result['log_info']['last_run'] = res.last_run 
         result['log_info']['tables'] = res.tables_count
         result['log_info']['total_time'] = res.total_run_time 
+        result['log_info']['status']= res.current_status #success_status
         result['log_error']=res.log_error
     else:
         result['log_info'] = '404 - Runtime info file not found'
@@ -129,14 +151,18 @@ def launch(request):
             return render(request,'log.html',context=result)
         elif status == 'stopped':
             try:
+                #status=runing_status
                 res.status= 'running'
+                print("saving object")
                 res.save()
+                print("object saved")
                 subprocess.run([bat_file])
                 res.status="stopped"
                 res.save()
             except:
                 res.status= 'stopped'
                 res.save()
+                print("saving object")
                 result['status'] = 'Bot is not running'
                 result['alert'] = 'Something went wrong'
                 return render(request,'log.html',result)

@@ -1,156 +1,131 @@
 {% load static %}
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bot Monitoring </title>
-    <!-- BOOTSTRAP STYLES-->
-  
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
-    <!-- FONTAWESOME STYLES-->
-    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
-    <!-- CUSTOM STYLES-->
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- GOOGLE FONTS-->
+    <title>Dashboard</title>
 
- <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+
+    <link rel="stylesheet" href="{% static '/css/style.min.css' %}">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
- 
+
 <body>
-    <div id="wrapper">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="adjust-nav">
-                <div class="navbar-header text-center">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <span class="navbar-brand" >&nbsp; Welcome To EBUY BOT MONITOR</a>
-                </div>
-                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                      
-                      <a href="{% url 'account_login' %}"> <button class="btn btn-primary">Logout </button></a>
-                      
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <!-- <h3>Dashboard</h3> -->
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="dash">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Processes</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                           <a href="log">EBUY GSA</a>
+                        </li>
                     </ul>
+                </li>
+                
+        </nav>
+
+        <div id="content">
+            <nav class="navbar navbar-expand text-center navbar-light bg-white topbar mb-4 static-top shadow">
+                <div class="container-fluid">
+                  <button type="button" id="sidebarCollapse" class="btn toggler btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <!-- <span>Toggle Sidebar</span> -->
+                </button>
+                  <p>Welcome to Automation Portal Dashboard</p>
                 </div>
-                
+                 <div class="container-fluid d-flex justify-content-end">
+             <a href="{% url 'account_login' %}"><button class="btn btn-primary logout">Logout</button></a>
+           </div>
+            </nav>
+
+            <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Pages/PageViews Automation</h1>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <!-- Default Card Example -->
+              <div class="card card-color mb-4 shadow">
+                <div class="card-header font-weight-bold">
+                  Bots Information
+                </div>
+                <div class="card-body cardBody">
+                  <ul class="navbar-nav">
+                    <li class="list-item">Bot Name: {{log_info.name}}</li>
+                    <li class="list-item">Bot Source of Trigger: {{log_info.source}}</li>
+                    <li class="list-item">Bot Total Tables:{{log_info.tables}}</li>
+                    <li class="list-item">Bot Runing Time:  {{log_info.total_time}}</li>
+                    <li class="list-item">Last Run Status: {{log_info.status}} </li>
+ 		    <li class="list-item">Bot current status : {{status}} </li>
+                  </ul>
+                </div>
+              </div>
 
             </div>
+
+            <div class="col-lg-6 top">
+              <div class="card card-color shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold">Manual Triggering</h6>
+                
+                </div>
+                <!-- Card Body -->
+                <div class="card-body cardBody">
+<h2>Errors During Runtime</h2>
+              {{log_error}} <br>
+                 <a href="launch"> <button class="btn trigger mt-3 btn-warning" onclick="alert('Triggered - '+'{{alert}}')">Menu trigger bot</button></a>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
         </div>
-        <!-- /. NAV TOP  -->
-    
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    
+        <!-- /.container-fluid -->
 
+      <!-- </div> -->
+      <!-- End of Main Content -->
+            <br>
+           
+           
+          
+        </div>
+      </div>
 
-                    <li>
-                        <a href="dash"><i class="fa fa-desktop "></i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a ><i class="fa fa-edit "></i>Process<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="log">EBUY GSA</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-
-                   
-                    
-
-
-             
-                  
-                </ul>
-
-            </div>
-
-        </nav> 
-
-    
-    
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
-            <div id="page-inner">
-                <div class="row">
-                    <h2 align="center">EBUY GSA</h2>
-
-                         <hr />
-                  
-<div class="container-fluid" style="background-color:white">
-  
-  <div class="row" style="margin-left:20px" >
-    <div class="col-md-5 " style="background-color:#fff9d4;margin-right: 20px;height: 300px; width:400px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
-    border-radius: 10px">
-        <h2>Bots Information</h2>
-      <p>Bot Name: {{log_info.name}}  </p>
-      <p>Bot Source of Trigger: {{log_info.source}} </p>
-      <p>Bot Last Run: {{log_info.last_run}}</p>
-      <p>Bot Total Tables:{{log_info.tables}} </p>
-      <p>Bot Runing Time:  {{log_info.total_time}} </p>
-      <p>Bot Status: {{log_info.status}} </p>
-      <p> Bot current status : {{status}} </p>
-    </div>
-    <div class="border-left d-sm-none d-md-block" style="width: 5px;"></div>
-    <div class="col-md-4" style="background-color:#fff9d4;margin-left: 170px;height: 300px;width:400px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
-    border-radius: 10px"">
-         <h2>Errors During Runtime</h2>
-       {{log_error}}
-<a href="launch"> <button class="btn btn-primary" style= "margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" onclick="alert('Triggered - '+'{{alert}}')"> Manual Trigger Bot</button> </a>
-    
-  </div>
-</div>
-                 </div>
-                
-
-</div>
-</div>
-</div>
-
-
-
-
-                          
-                   
-                        
-                 
-                   
-                      
- 
-
-</div>
-        <!-- /. PAGE WRAPPER  -->
-    </div>
-    <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="{% static 'js/jquery-1.10.2.js' %}"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="{% static 'js/jquery.metisMenu.js' %}"></script>
-    <!-- CUSTOM SCRIPTS -->
-    <script src="{% static 'js/custom.js' %}"></script>
-
-
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+   <!-- custom Js -->
+{% static '/css/style.min.css' %}"
+   <script src="{% static '/js/main.js' %}"></script>
 </body>
+
 </html>

@@ -91,12 +91,13 @@ DATABASES = {
         
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'BotMonitoring',
-        'HOST': 'HP\SQLEXPRESS',
-        'USER': 'sa',
-        'PASSWORD': 'izone500',
+        'HOST': 'WINDOWSSERVER20\MSSQLSERVER1',
+       
+ 
 
         'OPTIONS': {
             'driver':  'ODBC Driver 17 for SQL Server',
+            
                     }
     }
 }

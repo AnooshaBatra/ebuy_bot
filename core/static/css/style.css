@@ -1,0 +1,241 @@
+/*
+    DEMO STYLE
+*/
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+    margin: 0 auto;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+.chart-area {
+    position: relative;
+    height: 20rem;
+    width: 100%;
+}
+.card.card-height{
+    height: 400px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #fff;
+    color: #000;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #fff;
+    color: #000;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #fff;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #000;
+    background: #cdcdcc;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #000;
+    background: #fff;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #fff;
+    color: #000;
+}
+.card-color .cardBody{
+    background-color: rgb(255,249,212);
+}
+.card-text{
+    color: #000;
+}
+.card{
+    height: 250px;
+}
+.sub-head{
+    padding-left: 10px;
+}
+.btn.toggler{
+    display: none;
+}
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    background-color: #F3F3F4;
+    border-radius: 30px;
+}
+.btn.trigger{
+    margin-left: 150px;
+}
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    .btn.trigger{
+        margin-left: 230px;
+    }
+    .btn.toggler{
+        display: block;}
+}
+@media(max-width:425px){
+    span{
+        font-size: 15px;
+        line-height: 25px;
+    }
+    .top{
+        margin-top: 10px;
+    }
+    .btn.trigger{
+        margin-left: 80px;
+    }
+    footer{
+        margin-top: 20px;
+    }
+    .foot{
+        margin-top: 0px;
+    }
+    .btn.toggler{
+        display: block;}
+}
+@media(max-width:375px){
+  span{
+        font-size: 15px;
+        line-height: 25px;
+    }
+   .top{
+       margin-top: 30px;
+   }
+   footer{
+    margin-top: 70px;
+   }
+   .btn.trigger{
+    margin-left: 40px;
+}
+.foot{
+    margin-top: 0px;
+}
+.btn.toggler{
+    display: block;}
+}
+@media(max-width:320px){
+    span{
+        font-size: 15px;
+        line-height: 25px;
+    }
+    
+    .top{
+        margin-top:100px;
+    }
+    footer{
+        margin-top: 90px;
+    }
+    .btn.trigger{
+        margin-left: 20px;
+    }
+    .foot{
+        margin-top: 0px;
+    }
+    .btn.toggler{
+        display: block;}
+}
