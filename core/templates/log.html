@@ -72,13 +72,13 @@
                 <div class="card-header font-weight-bold">
                   Bots Information
                 </div>
-                <div class="card-body cardBody">
+                <div class="card-body cardBody" style="min-height: 35vh; overflow-y:scroll;">
                   <ul class="navbar-nav">
-                    <li class="list-item">Bot Name: {{log_info.name}}</li>
-                    <li class="list-item">Bot Source of Trigger: {{log_info.source}}</li>
-                    <li class="list-item">Bot Total Tables:{{log_info.tables}}</li>
-                    <li class="list-item">Bot Runing Time:  {{log_info.total_time}}</li>
-                    <li class="list-item">Last Run Status: {{log_info.status}} </li>
+                    <li class="list-item">Bot Name :  {{log_info.name}}</li>
+                    <li class="list-item">Bot Source of Trigger :  {{log_info.source}}</li>
+                    <li class="list-item">Bot Total Tables :  {{log_info.tables}}</li>
+                    <li class="list-item">Bot Runing Time :  {{log_info.total_time}}</li>
+                    <li class="list-item">Last Run Status  :  {{log_info.status}} </li>
  		    <li class="list-item">Bot current status : {{status}} </li>
                   </ul>
                 </div>
@@ -93,12 +93,20 @@
                 
                 </div>
                 <!-- Card Body -->
-                <div class="card-body cardBody">
+                <div class="card-body cardBody" style="min-height: 35vh; overflow-y:auto;">
+                <div>
 <h2>Errors During Runtime</h2>
               {{log_error}} <br>
-                 <a href="launch"> <button class="btn trigger mt-3 btn-warning" onclick="alert('Triggered - '+'{{alert}}')">Menu trigger bot</button></a>
+              
                 </div>
+
               </div>
+
+              </div>
+              <div>
+              
+                 <a href="launch"> <button class="btn trigger mt-3 btn-warning" onclick="alert('Triggered - '+'{{alert}}')">Manually trigger bot</button></a>
+                 </div>
 
 
             </div>
@@ -124,7 +132,7 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
    <!-- custom Js -->
-{% static '/css/style.min.css' %}"
+
    <script src="{% static '/js/main.js' %}"></script>
 </body>
 
